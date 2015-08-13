@@ -10,10 +10,11 @@ a Promise interface for loading AMD modules via Require.js
 global `promisedRequire` variable.
 
 
-### `promisedRequire()`
+### `promisedRequire(name, retries=0)`
 
-@param {(String|String[])} name - module(s) that you wish to load
-@returns {Promise}
+- @param {(`String`|`String[]`)} name - module(s) that you wish to load
+- @param {`Number`} [retries=0] - number of extra attempts in case of error
+- @returns {`Promise`}
 
 The Promise resolve-handler has the value of the module as its first argument.
 

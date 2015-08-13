@@ -109,3 +109,25 @@ test('promisedRequire(["moment", "inaccessible"])', (t) => {
     t.end();
   });
 });
+
+test('promisedRequire("inaccessible", 3) creates 4 script elements', (t) => {
+  var oldFn = document.createElement;
+  var calls = 0;
+  document.createElement = function () {
+    calls += 1;
+    return oldFn.apply(document, arguments);
+  };
+
+  promisedRequire('inaccessible', 3)
+  .then(() => {
+    t.fail('should not resolve');
+    t.end();
+  })
+  .catch((err) => {
+    t.pass('should reject');
+    t.instanceOf(err, Error);
+    t.equal(calls, 4);
+    document.createElement = oldFn;
+    t.end();
+  });
+});
