@@ -14,9 +14,20 @@ function promisedRequire(name) {
       return promisedRequire(n);
     }));
   }
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve, reject) {
     global.requirejs([name], function (result) {
       resolve(result);
+    }, function (err) {
+      var failedId = err.requireModules && err.requireModules[0];
+      var script;
+      if (failedId === name) {
+        global.requirejs.undef(name);
+        script = document.querySelector('script[data-requirecontext][data-requiremodule="' + name + '"]');
+        if (script) {
+          script.parentNode.removeChild(script);
+        }
+        reject(err);
+      }
     });
   });
 }
