@@ -19,7 +19,6 @@ function promisedRequire (name, retries=0) {
     }, (err) => {
       var failedId = err.requireModules && err.requireModules[0];
       if (failedId === name) {
-        global.console.log(failedId);
         global.requirejs.undef(name);
         let query = `script[data-requirecontext][data-requiremodule="${name}"]`;
         let script = document.querySelector(query);

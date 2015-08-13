@@ -22,7 +22,6 @@ function promisedRequire(name) {
     }, function (err) {
       var failedId = err.requireModules && err.requireModules[0];
       if (failedId === name) {
-        global.console.log(failedId);
         global.requirejs.undef(name);
         var query = 'script[data-requirecontext][data-requiremodule="' + name + '"]';
         var script = document.querySelector(query);
