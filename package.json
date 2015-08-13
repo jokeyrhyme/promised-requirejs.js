@@ -1,0 +1,51 @@
+{
+  "name": "@jokeyrhyme/promised-requirejs",
+  "version": "1.0.0",
+  "description": "a Promise interface for loading AMD modules via Require.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -e . -s promisedRequire -o dist/index.js",
+    "test": "eslint . && karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jokeyrhyme/promised-requirejs.js.git"
+  },
+  "author": "Ron Waldon (https://github.com/jokeyrhyme)",
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "promise",
+    "amd",
+    "loader",
+    "requirejs"
+  ],
+  "devDependencies": {
+    "@jokeyrhyme/load": "^1.0.1",
+    "babelify": "^6.1",
+    "browserify": "^11.0",
+    "eslint": "^1.1",
+    "eslint-config-semistandard": "^5.0",
+    "eslint-config-standard": "^4.1",
+    "karma": "^0.13.9",
+    "karma-browserify": "^4.3",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-tap": "^1.0",
+    "tape": "^4.1.0",
+    "tape-chai": "^1.1.0"
+  },
+  "babel": {
+    "stage": 3
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "files": [
+    "dist/index.js",
+    "index.js",
+    "LICENSE.txt",
+    "README.md"
+  ]
+}
