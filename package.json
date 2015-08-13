@@ -46,7 +46,7 @@
   "files": [
     "dist/index.js",
     "index.js",
-    "LICENSE.txt",
+    "LICENSE",
     "README.md"
   ]
 }
