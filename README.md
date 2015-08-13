@@ -2,6 +2,7 @@
 
 a Promise interface for loading AMD modules via Require.js
 
+[![npm module](https://img.shields.io/npm/v/@jokeyrhyme/promised-requirejs.svg)](https://www.npmjs.com/package/@jokeyrhyme/promised-requirejs)
 [![travis-ci](https://img.shields.io/travis/jokeyrhyme/promised-requirejs.js.svg)](https://travis-ci.org/jokeyrhyme/promised-requirejs.js)
 
 ## API
