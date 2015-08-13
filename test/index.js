@@ -37,7 +37,75 @@ test('Require.js loaded', (t) => {
   t.plan(3);
   load(REQUIRE_JS, function (err) {
     t.error(err);
-    t.isFunction(global.require);
     t.isFunction(global.requirejs);
+    t.isFunction(global.requirejs.config);
+    global.requirejs.config({
+      paths: {
+        bacon: 'https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.71/Bacon.min',
+        inaccessible: 'https://localhost/inaccessible',
+        moment: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min'
+      }
+    });
+  });
+});
+
+test('promisedRequire("bacon")', (t) => {
+  global.requirejs.undef('bacon');
+  promisedRequire('bacon')
+  .then((Bacon) => {
+    t.pass('should resolve');
+    t.isObject(Bacon, 'global.Bacon is an Object');
+    t.end();
+  })
+  .catch((err) => {
+    t.fail('should not reject');
+    t.error(err);
+    t.end();
+  });
+});
+
+test('promisedRequire("inaccessible")', (t) => {
+  global.requirejs.undef('inaccessible');
+  promisedRequire('inaccessible')
+  .then(() => {
+    t.fail('should not resolve');
+    t.end();
+  })
+  .catch((err) => {
+    t.pass('should reject');
+    t.instanceOf(err, Error);
+    t.end();
+  });
+});
+
+test('promisedRequire(["bacon", "moment"])', (t) => {
+  global.requirejs.undef('bacon');
+  global.requirejs.undef('moment');
+  promisedRequire(['bacon', 'moment'])
+  .then(([Bacon, Moment]) => {
+    t.pass('should resolve');
+    t.isObject(Bacon, 'global.Bacon is an Object');
+    t.isFunction(Moment, 'global.Moment is a Function');
+    t.end();
+  })
+  .catch((err) => {
+    t.fail('should not reject');
+    t.error(err);
+    t.end();
+  });
+});
+
+test('promisedRequire(["moment", "inaccessible"])', (t) => {
+  global.requirejs.undef('moment');
+  global.requirejs.undef('inaccessible');
+  promisedRequire(['moment', 'inaccessible'])
+  .then(() => {
+    t.fail('should not resolve');
+    t.end();
+  })
+  .catch((err) => {
+    t.pass('should reject');
+    t.instanceOf(err, Error);
+    t.end();
   });
 });

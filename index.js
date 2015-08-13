@@ -8,13 +8,19 @@
 */
 function promisedRequire (name) {
   if (Array.isArray(name)) {
-    return Promise.all(name.map(function (n) {
+    return Promise.all(name.map((n) => {
       return promisedRequire(n);
     }));
   }
-  return new Promise(function (resolve) {
-    global.require([name], function (result) {
+  return new Promise(function (resolve, reject) {
+    global.requirejs([name], (result) => {
       resolve(result);
+    }, (err) => {
+      var failedId = err.requireModules && err.requireModules[0];
+      if (failedId === name) {
+        global.requirejs.undef(name);
+        reject(err);
+      }
     });
   });
 }
