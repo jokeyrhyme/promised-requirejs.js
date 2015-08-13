@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "browserify -e . -s promisedRequire -o dist/index.js",
-    "test": "eslint . && karma start"
+    "test": "eslint . && karma start --browsers PhantomJS",
+    "test-full": "eslint . && karma start"
   },
   "repository": {
     "type": "git",

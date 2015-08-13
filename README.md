@@ -2,6 +2,8 @@
 
 a Promise interface for loading AMD modules via Require.js
 
+[![travis-ci](https://img.shields.io/travis/jokeyrhyme/promised-requirejs.js.svg)](https://travis-ci.org/jokeyrhyme/promised-requirejs.js)
+
 ## API
 
 [dist/index.js](dist/index.js) exports a CommonJS module, an AMD module, or a
